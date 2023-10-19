@@ -1,1 +1,4 @@
 https://hub.docker.com/repository/docker/ignajlo/android_lab/general
+
+
+Zadanie robione docelowo na ocenę 3.5
