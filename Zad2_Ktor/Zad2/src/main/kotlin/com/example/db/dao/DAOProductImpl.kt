@@ -15,7 +15,8 @@ class DAOProductImpl : DAOProduct {
         name = row[Products.name],
         description = row[Products.description],
         price = row[Products.price],
-        quantity = row[Products.quantity]
+        quantity = row[Products.quantity],
+        categoryId = row[Products.categoryId]
     )
 
     override suspend fun allProducts(): List<Product> = dbQuery {
@@ -29,12 +30,13 @@ class DAOProductImpl : DAOProduct {
             .singleOrNull()
     }
 
-    override suspend fun addNewProduct(name: String, description: String, price: Double, quantity: Int): Product? = dbQuery {
+    override suspend fun addNewProduct(name: String, description: String, price: Double, quantity: Int, categoryId: Int?): Product? = dbQuery {
         val insertStatement = Products.insert {
             it[Products.name] = name
             it[Products.description] = description
             it[Products.price] = price
             it[Products.quantity] = quantity
+            it[Products.categoryId] = categoryId
         }
         insertStatement.resultedValues?.singleOrNull()?.let(::resultRowToProduct)
     }
@@ -44,7 +46,8 @@ class DAOProductImpl : DAOProduct {
         name: String,
         description: String,
         price: Double,
-        quantity: Int
+        quantity: Int,
+        categoryId: Int?
     ): Boolean = dbQuery{
         Products.update({ Products.id eq id}) {
             it[Products.name] = name
@@ -52,6 +55,7 @@ class DAOProductImpl : DAOProduct {
             it[Products.price] = price
             it[Products.quantity] = quantity
             it[Products.id] = id
+            it[Products.categoryId] = categoryId
          } > 0
     }
 
@@ -63,9 +67,9 @@ class DAOProductImpl : DAOProduct {
 val daoProduct: DAOProduct = DAOProductImpl().apply {
     runBlocking {
         if(allProducts().isEmpty()) {
-            addNewProduct("Product 1", "Description 1", 1.0, 1)
-            addNewProduct("Product 2", "Description 2", 2.0, 2)
-            addNewProduct("Product 3", "Description 3", 3.0, 3)
+            addNewProduct("Product 1", "Description 1", 1.0, 1, null)
+            addNewProduct("Product 2", "Description 2", 2.0, 2, null)
+            addNewProduct("Product 3", "Description 3", 3.0, 3, null)
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.example.plugins
 
-import com.example.controller.ProductController
+import com.example.controller.*
 import io.ktor.server.application.*
 import io.ktor.server.http.content.*
 import io.ktor.server.response.*
@@ -27,6 +27,24 @@ fun Application.configureRouting() {
             }
             post("{id}") {
                 ProductController.deleteProduct(call)
+            }
+        }
+
+        route("/categories") {
+            get {
+                CategoryController.getAllCategories(call)
+            }
+            post {
+                CategoryController.addCategory(call)
+            }
+            get("{id}") {
+                CategoryController.getCategory(call)
+            }
+            get("{id}/edit") {
+                CategoryController.editCategory(call)
+            }
+            post("{id}") {
+                CategoryController.deleteCategory(call)
             }
         }
     }
