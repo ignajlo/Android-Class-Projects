@@ -77,13 +77,20 @@ class MainActivity : AppCompatActivity() {
         val button: Button = findViewById(buttonSetup.buttonId)
         button.setOnClickListener {
             val newText = "${textDisplay.text}${buttonSetup.text}"
-            when (buttonSetup) {
-                OneArgumentButton.PERCENTAGE -> {
-                    handlePercentage()
+            when(currentState){
+            State.SINGLE_NUMBER, State.SECOND_NUMBER  -> {
+                when (buttonSetup) {
+                    OneArgumentButton.PERCENTAGE -> {
+                        handlePercentage()
+                    }
+
+                    OneArgumentButton.LG -> {
+                        handleLogarithm()
+                    }
+
+                    else -> {}
                 }
-                OneArgumentButton.LG -> {
-                    handleLogarithm()
-                }
+            }
                 else -> {}
             }
         }
@@ -124,6 +131,11 @@ class MainActivity : AppCompatActivity() {
             when(currentState){
                 State.SINGLE_NUMBER -> {
                     textDisplay.text = newText
+                    currentState = State.DOUBLE_OPERATOR
+                }
+                State.SECOND_NUMBER -> {
+                    textDisplay.text = "${evaluateExpression(textDisplay.text.toString()).toString()}${buttonSetup.text}"
+                    secondDot = false;
                     currentState = State.DOUBLE_OPERATOR
                 }
                 else -> {}
