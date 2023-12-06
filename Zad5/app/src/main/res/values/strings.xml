@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ShopApp</string>
+    <string name="items">Items</string>
+    <string name="cart">Cart</string>
+    <string name="item_details">Details</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="update_cart">Update Cart</string>
+    <string name="remove_from_cart">Remove</string>
+    <string name="to_add">To add:</string>
+    <string name="in_cart">In cart:</string>
+</resources>
