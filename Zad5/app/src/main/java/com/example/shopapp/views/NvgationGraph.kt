@@ -22,16 +22,20 @@ fun NavGraph(navController: NavHostController, paddingValues: PaddingValues) {
         }
         composable(Screen.ItemInCartDetails.route) {
             val id = it.arguments?.getString(ITEM_ID_KEY)?.toLongOrNull()
-            if (id != null) {
-                ItemDetails(id, navController)
-            }
+            ItemDetailsSetUp(Screen.ItemsDetails.route, id, navController)
         }
         composable(Screen.ItemsDetails.route) {
             val id = it.arguments?.getString(ITEM_ID_KEY)?.toLongOrNull()
-            if (id != null) {
-                ItemDetails(id, navController)
-            }
+            ItemDetailsSetUp(Screen.ItemsDetails.route, id, navController)
         }
 
+    }
+
+}
+
+@Composable
+fun ItemDetailsSetUp(route : String, id : Long?, navController: NavHostController){
+    if (id != null) {
+        ItemDetails(id, navController)
     }
 }

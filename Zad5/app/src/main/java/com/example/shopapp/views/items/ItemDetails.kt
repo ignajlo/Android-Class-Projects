@@ -80,10 +80,6 @@ fun ItemDetails(itemId: Long, navController: NavController) {
         )
 
 
-
-
-
-
         Box(
             contentAlignment = Alignment.BottomEnd,
             modifier = Modifier.fillMaxSize()

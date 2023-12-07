@@ -75,7 +75,7 @@ fun CartItem(item: Item, navController: NavController, viewModel: CartViewModel)
             }
     ) {
         Box(
-            Modifier.padding(10.dp)
+            Modifier.padding(12.dp)
         ) {
             Column(
                 Modifier
@@ -86,14 +86,8 @@ fun CartItem(item: Item, navController: NavController, viewModel: CartViewModel)
                     text = item.name,
                     fontSize = 26.sp,
                 )
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    contentAlignment = Alignment.CenterEnd
-                ) {
-                    Text("Quantity: " + item.addedQuantity, fontSize = 18.sp)
+                Text("Quantity: " + item.addedQuantity, fontSize = 18.sp, modifier = Modifier.padding(top = 5.dp))
 
-                }
 
             }
 
