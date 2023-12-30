@@ -68,6 +68,10 @@ val daoCategory : DAOCategory = DAOCategoryImpl().apply {
         if(allCategories().isEmpty()) {
             addNewCategory("Category 1", "Description 1", "Tag 1", 1.0)
             addNewCategory("Category 2", "Description 2", "Tag 2", 2.0)
+            addNewCategory("Category 3", "Description 3", "Tag 3", 3.0)
+            addNewCategory("Category 4", "Description 4", "Tag 4", 4.0)
+            addNewCategory("Category 5", "Description 5", "Tag 5", 5.0)
+            addNewCategory("Category 6", "Description 6", "Tag 6", 6.0)
         }
     }
 }

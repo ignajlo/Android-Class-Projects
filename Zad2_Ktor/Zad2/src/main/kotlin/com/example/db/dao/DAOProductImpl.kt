@@ -67,9 +67,12 @@ class DAOProductImpl : DAOProduct {
 val daoProduct: DAOProduct = DAOProductImpl().apply {
     runBlocking {
         if(allProducts().isEmpty()) {
-            addNewProduct("Product 1", "Description 1", 1.0, 1, null)
-            addNewProduct("Product 2", "Description 2", 2.0, 2, null)
-            addNewProduct("Product 3", "Description 3", 3.0, 3, null)
+            addNewProduct("Product 1", "Description 1", 1.0, 1, 1)
+            addNewProduct("Product 2", "Description 2", 2.0, 2, 2)
+            addNewProduct("Product 3", "Description 3", 3.0, 3, 2)
+            addNewProduct("Product 4", "Description 4", 4.0, 4, 3)
+            addNewProduct("Product 5", "Description 5", 5.0, 5, 4)
+
         }
     }
 }
