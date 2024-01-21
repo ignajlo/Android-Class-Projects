@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">Zad8</string>
-    <string name="default_web_client">625093020571-t4hio41c9kkpsfbbliropb0ngnaclnql.apps.googleusercontent.com</string>
-    <string name="facebook_application_id" translatable="false">670502211963355</string>
-    <string name="facebook_app_id" translatable="false">670502211963355</string>
-    <string name="facebook_client_token" translatable="false">7e0e74c4c67db931742dd8b947f33f3b</string>
-    <string name="facebook_login_protocol_scheme" translatable="false">fb670502211963355</string>
-</resources>
