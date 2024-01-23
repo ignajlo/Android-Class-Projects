@@ -187,7 +187,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun evaluateExpression(expression: String): BigDecimal {
+    public fun evaluateExpression(expression: String): BigDecimal {
         return try {
             val result = ExpressionBuilder(expression)
                 .variables("x", "y")
