@@ -7,6 +7,7 @@ android {
     namespace = "com.example.todo"
     compileSdk = 34
 
+
     defaultConfig {
         applicationId = "com.example.todo"
         minSdk = 31
@@ -15,6 +16,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        dataBinding = true
     }
 
     buildTypes {

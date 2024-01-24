@@ -7,12 +7,17 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.content.SharedPreferences
+import android.widget.CheckBox
+import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import com.example.todo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var taskViewModel: TaskViewModel
     private lateinit var taskAdapter: TaskAdapter
     private lateinit var taskRecyclerView: RecyclerView
     private lateinit var database: TaskDatabase
@@ -22,17 +27,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val binding: ActivityMainBinding = DataBindingUtil.setContentView(
+            this, R.layout.activity_main
+        )
+
         taskRecyclerView = findViewById(R.id.rv_task)
         taskRecyclerView.layoutManager = LinearLayoutManager(this)
         database = TaskDatabase(this)
         sharedPreferences = getPreferences(MODE_PRIVATE)
 
-        // Check if the database has already been initialized
         if (!sharedPreferences.getBoolean("DATABASE_INITIALIZED", false)) {
-            // Initialize the database only once
             runBlocking {
                 insertInitialTasks()
-                // Mark the database as initialized in SharedPreferences
                 sharedPreferences.edit().putBoolean("DATABASE_INITIALIZED", true).apply()
             }
         }
@@ -49,6 +55,26 @@ class MainActivity : AppCompatActivity() {
 
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(taskRecyclerView)
+
+
+        taskViewModel = ViewModelProvider(this).get(TaskViewModel::class.java)
+
+        taskViewModel.name.observe(this, { nameValue ->
+            findViewById<TextView>(R.id.tv_title).text = nameValue
+        })
+
+        taskViewModel.description.observe(this, { opisValue ->
+            findViewById<TextView>(R.id.tv_description).text = opisValue
+        })
+
+        taskViewModel.date.observe(this, { dataValue ->
+            findViewById<TextView>(R.id.tv_created_at).text = dataValue
+        })
+
+        taskViewModel.status.observe(this, { statusValue ->
+            findViewById<CheckBox>(R.id.cb_done).isChecked = statusValue
+        })
+
     }
 
     private suspend fun insertInitialTasks() {
